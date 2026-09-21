@@ -1,5 +1,4 @@
 data:extend({
-  -- РЕЦЕПТЫ ПРЕДМЕТОВ
   {
     type = "recipe",
     name = "battery_charger_recipe",
@@ -33,12 +32,11 @@ data:extend({
     results = {{type = "item", name = "battery_empty", amount = 2}}
   },
 
-  -- ПРЕДМЕТЫ (ЗАРЯДНИК И РАЗРЯДНИК)
   {
     type = "item",
     name = "battery_charger_item",
-    icon = "__base__/graphics/icons/substation.png",
-    icon_size = 64,
+    icon = "__Batteries__/graphics/charger.png",
+    icon_size = 128,
     subgroup = "storage",
     order = "a",
     place_result = "battery_charger",
@@ -47,49 +45,56 @@ data:extend({
   {
     type = "item",
     name = "battery_discharger_item",
-    icon = "__base__/graphics/icons/substation.png",
-    icon_size = 64,
+    icon = "__Batteries__/graphics/charger.png",
+    icon_size = 128,
     subgroup = "storage",
     order = "a",
     place_result = "battery_discharger",
     stack_size = 25
   },
 
-  -- ЗАРЯДНАЯ СТАНЦИЯ (СБОРОЧНЫЙ АВТОМАТ)
-  {
-    type = "assembling-machine",
-    name = "battery_charger",
-    crafting_categories = {"battery_charger"},
-    icon = "__base__/graphics/icons/substation.png",
-    icon_size = 64,
-    flags = {"placeable-neutral", "player-creation"},
-    minable = {mining_time = 0.5, result = "battery_charger_item"},
-    max_health = 200,
-    crafting_speed = 1.0,
-    energy_usage = "2MW",
-    energy_source = {
-      type = "electric",
-      usage_priority = "secondary-input"
-    },
-    collision_box = {{-0.7, -0.7}, {0.7, 0.7}},
-    selection_box = {{-1.0, -1.0}, {1.0, 1.0}},
-    animation = {
-      filename = "__base__/graphics/entity/substation/substation.png",
-      priority = "extra-high",
-      width = 70,
-      height = 136,
-      frame_count = 1,
-      scale = 0.5,
-      shift = {0.1875, -1.0625}
-    }
+      {
+  type = "assembling-machine",
+  name = "battery_charger",
+  crafting_categories = {"battery_charger"},
+  icon = "__Batteries__/graphics/charger.png",
+  icon_size = 128,
+  flags = {"placeable-neutral", "player-creation"},
+  minable = {mining_time = 0.5, result = "battery_charger_item"},
+  max_health = 200,
+  crafting_speed = 1.0,
+  energy_usage = "2MW",
+  energy_source = {
+    type = "electric",
+    usage_priority = "secondary-input"
   },
+  collision_box = {{-0.7, -0.7}, {0.7, 0.7}},
+  selection_box = {{-1.0, -1.0}, {1.0, 1.0}},
+  animation = {
+    layers = {
+      {
+        filename = "__Batteries__/graphics/charger.png",
+        priority = "extra-high",
+        width = 128,
+        height = 128,
+        frame_count = 1,
+        line_length = 1,
+        repeat_count = 4,
+        scale = 0.5,
+        shift = {0, 0}
+      }
+    }
+  } -- <- Вот эта скобка закрывает блок animation
+}, -- <- Вот эта скобка закрывает саму сущностьassembling-machine
 
-  -- РАЗРЯДНАЯ СТАНЦИЯ (ГЕНЕРАТОР НА ТОПЛИВЕ)
+
+
+
   {
     type = "burner-generator",
     name = "battery_discharger",
-    icon = "__base__/graphics/icons/substation.png",
-    icon_size = 64,
+    icon = "__Batteries__/graphics/charger.png",
+    icon_size = 128,
     max_power_output = "1.5MW",
     flags = {"placeable-neutral", "player-creation"},
     minable = {mining_time = 0.8, result = "battery_discharger_item"},
@@ -107,17 +112,16 @@ data:extend({
     collision_box = {{-0.7, -0.7}, {0.7, 0.7}},
     selection_box = {{-1.0, -1.0}, {1.0, 1.0}},
     animation = {
-      filename = "__base__/graphics/entity/substation/substation.png",
+      filename = "__Batteries__/graphics/charger.png",
       priority = "extra-high",
-      width = 70,
-      height = 136,
+      width = 128,
+      height = 128,
       frame_count = 1,
-      scale = 0.5,
-      shift = {0.1875, -1.0625}
+      scale = 1,
+      shift = {0, 0}
     }
   },
 
-  -- РЕЦЕПТ ЗАРЯДКИ БАТАРЕИ
   {
     type = "recipe",
     name = "battery_charging",
@@ -132,7 +136,6 @@ data:extend({
     energy_required = 20
   },
 
-  -- БАТАРЕИ (ПРЕДМЕТЫ)
   {
     type = "item",
     name = "battery_charged",
@@ -155,7 +158,6 @@ data:extend({
     stack_size = 70
   },
 
-  -- КАТЕГОРИИ
   { type = "fuel-category", name = "battery-fuel" },
   { type = "recipe-category", name = "battery_charger" }
 })
