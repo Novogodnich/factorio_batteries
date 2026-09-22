@@ -53,42 +53,56 @@ data:extend({
     stack_size = 25
   },
 
-      {
-  type = "assembling-machine",
-  name = "battery_charger",
-  crafting_categories = {"battery_charger"},
-  icon = "__Batteries__/graphics/charger.png",
-  icon_size = 128,
-  flags = {"placeable-neutral", "player-creation"},
-  minable = {mining_time = 0.5, result = "battery_charger_item"},
-  max_health = 200,
-  crafting_speed = 1.0,
-  energy_usage = "2MW",
-  energy_source = {
-    type = "electric",
-    usage_priority = "secondary-input"
-  },
-  collision_box = {{-0.7, -0.7}, {0.7, 0.7}},
-  selection_box = {{-1.0, -1.0}, {1.0, 1.0}},
-  animation = {
-    layers = {
-      {
-        filename = "__Batteries__/graphics/charger.png",
-        priority = "extra-high",
-        width = 128,
-        height = 128,
-        frame_count = 1,
-        line_length = 1,
-        repeat_count = 4,
-        scale = 0.5,
-        shift = {0, 0}
+  {
+    type = "assembling-machine",
+    name = "battery_charger",
+    crafting_categories = {"battery_charger"},
+    icon = "__Batteries__/graphics/charger.png",
+    icon_size = 128,
+    flags = {"placeable-neutral", "player-creation"},
+    minable = {mining_time = 0.5, result = "battery_charger_item"},
+    max_health = 200,
+    crafting_speed = 1.0,
+    energy_usage = "2MW",
+    energy_source = {
+      type = "electric",
+      usage_priority = "secondary-input"
+    },
+    collision_box = {{-0.7, -0.7}, {0.7, 0.7}},
+    selection_box = {{-1.0, -1.0}, {1.0, 1.0}},
+
+    -- В Factorio 2.0 графика сборочного автомата задаётся через graphics_set
+    graphics_set = {
+      animation = {
+        layers = {
+          {
+            filename = "__Batteries__/graphics/charger.png",
+            priority = "extra-high",
+            width = 128,
+            height = 128,
+            frame_count = 1,
+            repeat_count = 1,
+            scale = 0.5,
+            shift = {0, 0}
+          }
+        }
+      },
+      idle_animation = {
+        layers = {
+          {
+            filename = "__Batteries__/graphics/charger.png",
+            priority = "extra-high",
+            width = 128,
+            height = 128,
+            frame_count = 1,
+            repeat_count = 1,
+            scale = 0.5,
+            shift = {0, 0}
+          }
+        }
       }
     }
-  } -- <- Вот эта скобка закрывает блок animation
-}, -- <- Вот эта скобка закрывает саму сущностьassembling-machine
-
-
-
+  },
 
   {
     type = "burner-generator",
@@ -111,14 +125,27 @@ data:extend({
     },
     collision_box = {{-0.7, -0.7}, {0.7, 0.7}},
     selection_box = {{-1.0, -1.0}, {1.0, 1.0}},
+
+    idle_animation = {
+      north = {
+        filename = "__Batteries__/graphics/charger.png",
+        width = 128,
+        height = 128,
+        frame_count = 1,
+        scale = 0.5,
+        shift = {0, 0}
+      }
+    },
+
     animation = {
-      filename = "__Batteries__/graphics/charger.png",
-      priority = "extra-high",
-      width = 128,
-      height = 128,
-      frame_count = 1,
-      scale = 1,
-      shift = {0, 0}
+      north = {
+        filename = "__Batteries__/graphics/charger.png",
+        width = 128,
+        height = 128,
+        frame_count = 1,
+        scale = 0.5,
+        shift = {0, 0}
+      }
     }
   },
 
