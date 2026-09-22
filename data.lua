@@ -1,8 +1,42 @@
 data:extend({
   {
+    type = "technology",
+    name = "battery_charging_technology",
+    icon = "__base__/graphics/technology/battery.png",
+    icon_size = 256,
+    effects = {
+      {
+        type = "unlock-recipe",
+        recipe = "battery_charger_recipe"
+      },
+      {
+        type = "unlock-recipe",
+        recipe = "battery_discharger_recipe"
+      },
+      {
+        type = "unlock-recipe",
+        recipe = "battery_charging"
+      },
+      {
+        type = "unlock-recipe",
+        recipe = "battery_empty_recipe"
+      },
+    },
+    prerequisites = {"logistics", "electronics", "steel-processing", "battery"},
+    unit = {
+      count = 200,
+      ingredients = {
+        {"automation-science-pack", 1},
+        {"logistic-science-pack", 1}
+      },
+      time = 40
+    },
+    order = "a-d-b"
+  },
+  {
     type = "recipe",
     name = "battery_charger_recipe",
-    enabled = true,
+    enabled = false,
     ingredients = {
       {type = "item", name = "steel-plate", amount = 10},
       {type = "item", name = "electronic-circuit", amount = 5}
@@ -12,7 +46,7 @@ data:extend({
   {
     type = "recipe",
     name = "battery_discharger_recipe",
-    enabled = true,
+    enabled = false,
     ingredients = {
       {type = "item", name = "steel-plate", amount = 10},
       {type = "item", name = "electronic-circuit", amount = 5}
@@ -22,7 +56,7 @@ data:extend({
   {
     type = "recipe",
     name = "battery_empty_recipe",
-    enabled = true,
+    enabled = false,
     energy_required = 5,
     ingredients = {
       {type = "item", name = "battery", amount = 10},
@@ -152,7 +186,7 @@ data:extend({
   {
     type = "recipe",
     name = "battery_charging",
-    enabled = true,
+    enabled = false,
     category = "battery_charger",
     ingredients = {
       {type = "item", name = "battery_empty", amount = 1}
