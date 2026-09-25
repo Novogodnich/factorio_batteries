@@ -43,6 +43,44 @@ data:extend({
     },
     results = {{type = "item", name = "battery_charger_item", amount = 1}}
   },
+
+{
+  type = "recipe",
+  name = "battery_discharger_pro_recipe",
+  enabled = false,
+  ingredients = {
+    {type = "item", name = "iron-plate", amount = 35},
+    {type = "item", name = "steel-plate", amount = 10},
+    {type = "item", name = "advanced-circuit", amount = 5}
+  },
+  results = {{type = "item", name = "battery_discharger_item_pro", amount = 1}}
+},
+
+{
+  type = "technology",
+  name = "battery_discharging_pro_technology",
+  icon = "__base__/graphics/technology/battery.png",
+  icon_size = 256,
+  effects = {
+    {
+      type = "unlock-recipe",
+      recipe = "battery_discharger_pro_recipe"
+    }
+  },
+  prerequisites = {"battery_charging_technology", "advanced-circuit"},
+  unit = {
+    count = 250,
+    ingredients = {
+      {"automation-science-pack", 1},
+      {"logistic-science-pack", 1},
+      {"chemical-science-pack", 1},
+      {"utility-science-pack", 1}
+    },
+    time = 40
+  },
+  order = "a-d-c"
+},
+
   {
     type = "recipe",
     name = "battery_discharger_recipe",
@@ -59,9 +97,9 @@ data:extend({
     enabled = false,
     energy_required = 5,
     ingredients = {
-      {type = "item", name = "battery", amount = 10},
-      {type = "item", name = "copper-plate", amount = 20},
-      {type = "item", name = "iron-plate", amount = 15}
+      {type = "item", name = "battery", amount = 8},
+      {type = "item", name = "copper-plate", amount = 5},
+      {type = "item", name = "iron-plate", amount = 10}
     },
     results = {{type = "item", name = "battery_empty", amount = 2}}
   },
@@ -145,7 +183,63 @@ data:extend({
     icon_size = 128,
     max_power_output = "1.5MW",
     flags = {"placeable-neutral", "player-creation"},
-    minable = {mining_time = 0.8, result = "battery_discharger_item"},
+    minable = {mining_time = 0.55, result = "battery_discharger_item"},
+    max_health = 200,
+    energy_source = {
+      type = "electric",
+      usage_priority = "primary-output"
+    },
+    burner = {
+      type = "burner",
+      fuel_categories = {"battery-fuel"},
+      fuel_inventory_size = 5,
+      burnt_inventory_size = 10,
+    },
+    collision_box = {{-0.7, -0.7}, {0.7, 0.7}},
+    selection_box = {{-1.0, -1.0}, {1.0, 1.0}},
+
+    idle_animation = {
+      north = {
+        filename = "__Batteries__/graphics/charger.png",
+        width = 128,
+        height = 128,
+        frame_count = 1,
+        scale = 0.5,
+        shift = {0, 0}
+      }
+    },
+
+    animation = {
+      north = {
+        filename = "__Batteries__/graphics/charger.png",
+        width = 128,
+        height = 128,
+        frame_count = 1,
+        scale = 0.5,
+        shift = {0, 0}
+      }
+    }
+  },
+
+  {
+  type = "item",
+  name = "battery_discharger_item_pro",
+  icon = "__Batteries__/graphics/charger.png",
+  icon_size = 128,
+  subgroup = "storage",
+  order = "a",
+  place_result = "battery_discharger_pro",
+  stack_size = 25
+},
+
+  {
+    type = "burner-generator",
+    name = "battery_discharger_pro",
+    icon = "__Batteries__/graphics/charger.png",
+    icon_size = 128,
+    max_power_output = "8MW",
+    flags = {"placeable-neutral", "player-creation"},
+    minable = {mining_time = 0.8, result = "battery_discharger_item_pro"},
     max_health = 200,
     energy_source = {
       type = "electric",
